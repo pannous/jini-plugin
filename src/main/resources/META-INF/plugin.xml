@@ -1,0 +1,244 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>com.pannous.jini-plugin</id>
+    <name>Jini</name>
+    <!--
+    https://plugins.jetbrains.com/plugin/21229-jini/versions#verification-results
+    -->
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="info@pannous.com" url="http://pannous.com">Pannous</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+    Suit of tools for AI assisted development.<br>
+    <br>
+    <br>
+    Currently powered by ChatGPT-3.5 via OpenAI API, trial key provided<br>
+    Use with your own key from <a href="https://platform.openai.com/account/api-keys">https://platform.openai.com/account/api-keys</a>
+    <br>
+    • <b>Explain</b>: Get explanations for any code file or segment through OpenAI API.<br>
+    • <b>Fix</b>: Let ChatGPT analyze and explain compiler build error messages and suggest fixes.<br>
+    • <b>Transpile</b>: Convert code to other languages. <br>
+    • <b>Execute</b>: English instructions converted to shell commands<br>
+    • <b>Custom Edit</b>: Apply custom instructions to modify your code<br>
+    • <b>Documentation</b>: Get inline code documentation<br>
+    • <b>Review</b>: Learn how to improve your code by getting review suggestions through OpenAI API.<br>
+    <br>
+    Preview Beta Features:<br>
+    • <b>Code</b>: Specify functionality in English and let ChatGPT write the code. (beta!)  <br>
+    • <b>Complete</b>: Get inline code completion suggestions through OpenAI API.(beta!) <br>
+    • <b>Tests</b>: Generate tests for selected file or code<br>
+    • <b>Optimize/Improve</b>: Let ChatGPT make your code faster, cleaner and better<br>
+    <br>
+
+    This is the first MVP version, please send any feedback to info@pannous.com, more fixes and features will be coming soon.<br>
+
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!--    <platform name="cordova">-->
+    <!--        <icon src="pluginIcon.svg" />-->
+    <!--    </platform>-->
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+
+        <extension id="Jini" order="last" os="mac">
+
+        </extension>
+
+        <toolWindow id="Jini" secondary="true" icon="AllIcons.General.Modified" anchor="right"
+                    factoryClass="com.pannous.jini.window.MyToolWindowFactory"/>
+
+        <applicationConfigurable parentId="tools" instance="com.pannous.jini.settings.AppSettingsConfigurable"
+                                 id="com.pannous.jini.settings.AppSettingsConfigurable"
+                                 displayName="Jini"/>
+        <applicationService serviceImplementation="com.pannous.jini.settings.AppSettingsState"/>
+    </extensions>
+
+
+    <applicationListeners>
+        <listener class="com.pannous.jini.listeners.CompilationFinished"
+                  topic="jetbrains.buildServer.messages.serviceMessages.CompilationFinished"/>
+
+    </applicationListeners>
+
+    <actions>
+        <group id="Jini.Refactor.Actions" description="Jini refactor actions">
+            <add-to-group group-id="RefactoringMenu" anchor="first"/>
+        </group>
+
+        <group id="Jini.Actions" description="Jini AI Actions">
+            <action id="Jini.Explain" class="com.pannous.jini.Explain"
+                    text="Explain" description="Explains the selected text, code or error.">
+                <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+                add-to-group group-id="Jini.Refactor.Actions" anchor="first"/>
+                <synonym text="Describe"/>
+                <synonym text="Comment"/>
+                <keyboard-shortcut keymap="$default" first-keystroke="shift meta E"/>
+            </action>
+
+            <action id="Fix" class="com.pannous.jini.Fix"
+                    text="Fix" description="Try to fix the currently selected code or error using OpenAI.">
+                <!--                    icon="/icons/fix.png"-->
+
+                >
+                <synonym text="Correct Mistake"/>
+                <synonym text="Patch Error"/>
+                <synonym text="Solve Issue"/>
+                <!--Resolve ^^ -->
+                <add-to-group group-id="ConsoleView.PopupMenu" anchor="first"/>
+                <add-to-group group-id="GoToErrorGroup" anchor="first"/>
+            </action>
+
+
+            <action id="com.pannous.jini.Edit" class="com.pannous.jini.Edit" text="Custom AI Refactor…"
+                    description="Let OpenAI do a code refinement of the selected elements with given user instructions.">
+                <synonym text="Refine"/>
+                <synonym text="Refactor"/>
+                <synonym text="Modify"/>
+                <synonym text="Edit"/>
+                <synonym text="Custom"/>
+                <synonym text="Update"/>
+                <synonym text="Upgrade"/>
+                <synonym text="Improve"/>
+                <synonym text="Enhance"/>
+                <synonym text="Better"/>
+                <synonym text="Revamp"/>
+                <synonym text="Polish"/>
+                <synonym text="Clean"/>
+                <synonym text="Transform"/>
+                <synonym text="Alter"/>
+                <add-to-group group-id="AnalyzeActions" anchor="first"/>
+                <!--                <add-to-group group-id="RefactoringMenu" anchor="first"/>-->
+                <add-to-group group-id="Jini.Refactor.Actions" anchor="first"/>
+            </action>
+
+            <action id="com.pannous.jini.Transpile" class="com.pannous.jini.Transpile"
+                    text="Transpile to Target Language"
+                    description="Let GPT do a code review of the selected elements.">
+                <synonym text="Convert"/>
+                <synonym text="Transpile"/>
+                <synonym text="Translate"/>
+                <synonym text="Transform"/>
+                <add-to-group group-id="RefactoringMenu" anchor="first"/>
+
+            </action>
+
+            <action id="com.pannous.jini.Complete" class="com.pannous.jini.Complete"
+                    text="OpenAI Code Complete…"
+                    description="Complete the statement using OpenAI"
+            >
+                <synonym text="Code"/>
+                <synonym text="Write"/>
+                <synonym text="Implement"/>
+                <synonym text="Suggest"/>
+                <add-to-group group-id="CodeCompletionGroup" anchor="first"/>
+            </action>
+
+
+            <action id="com.pannous.jini.Execute" class="com.pannous.jini.Execute"
+                    text="English System Command…"
+                    description="⚠️ Run system command as interpreted by OpenAI"
+            >
+                <synonym text="Execute"/>
+                <synonym text="Run"/>
+                <synonym text="Zsh"/>
+                <synonym text="Bash"/>
+                <synonym text="Console"/>
+                <synonym text="Shell"/>
+                <synonym text="Terminal"/>
+                <!--                TODO : -->
+                <add-to-group group-id="ExternalSystem.Actions" anchor="first"/>
+                <add-to-group group-id="ConsoleView.PopupMenu" anchor="first"/>
+            </action>
+
+
+            <action id="com.pannous.jini.Review" class="com.pannous.jini.Review" text="Code Review via AI"
+                    description="Let GPT do a code review of the selected elements.">
+                <synonym text="Improve"/>
+                <synonym text="Enhance"/>
+                <synonym text="Better"/>
+                <synonym text="Revamp"/>
+                <synonym text="Polish"/>
+                <synonym text="Clean"/>
+                <synonym text="Upgrade"/>
+                <synonym text="Comment"/>
+                <synonym text="Clarify"/>
+                <synonym text="Analyze"/>
+                <!--                <add-to-group group-id="EditorPopupMenu" anchor="first"/>-->
+                <add-to-group group-id="AnalyzeActions" anchor="first"/>
+            </action>
+
+
+            <action id="com.pannous.jini.Documentation" class="com.pannous.jini.Documentation"
+                    text="Write Documentation"
+                    description="Let GPT write documentation the selected elements.">
+                <add-to-group group-id="AnalyzeActions" anchor="first"/>
+            </action>
+
+            <action id="com.pannous.jini.Tests" class="com.pannous.jini.Tests" text="Write Tests"
+                    description="Let GPT write tests for the selected elements.">
+                <add-to-group group-id="AnalyzeActions" anchor="first"/>
+            </action>
+
+            <action id="com.pannous.jini.Discuss" class="com.pannous.jini.Discuss" text="Discuss Code Fragments"
+                    description="Chat with GPT over your program (or anything).">
+                <add-to-group group-id="AnalyzeActions" anchor="first"/>
+                <synonym text="Discuss"/>
+                <synonym text="Converse"/>
+                <synonym text="Chat"/>
+                <synonym text="Talk"/>
+                <synonym text="Debate"/>
+                <synonym text="Ask"/>
+                <synonym text="Question"/>
+            </action>
+
+
+            <action id="com.pannous.jini.Optimize" class="com.pannous.jini.Optimize" text="Optimize Code in Place"
+                    description="Let GPT automatically optimize the selected elements.">
+                <synonym text="Improve"/>
+                <synonym text="Enhance"/>
+                <synonym text="Optimize"/>
+                <synonym text="Better"/>
+                <synonym text="Revamp"/>
+                <synonym text="Polish"/>
+                <synonym text="Clean"/>
+                <synonym text="Upgrade"/>
+                <synonym text="Clarify"/>
+                <synonym text="Analyze"/>
+                <add-to-group group-id="Jini.Refactor.Actions" anchor="first"/>
+                <add-to-group group-id="AnalyzeActions" anchor="first"/>
+            </action>
+
+            <!--            <action id="com.pannous.jini.Improve" class="com.pannous.jini.Improve" text="Improve Code in Place"-->
+            <!--                    description="Let GPT automatically improve the selected elements.">-->
+            <!--                <synonym text="Improve"/>-->
+            <!--                <synonym text="Enhance"/>-->
+            <!--                <synonym text="Optimize"/>-->
+            <!--                <synonym text="Better"/>-->
+            <!--                <synonym text="Revamp"/>-->
+            <!--                <synonym text="Polish"/>-->
+            <!--                <synonym text="Clean"/>-->
+            <!--                <synonym text="Upgrade"/>-->
+            <!--                <synonym text="Comment"/>-->
+            <!--                <synonym text="Clarify"/>-->
+            <!--                <synonym text="Analyze"/>-->
+            <!--&lt;!&ndash;                <add-to-group group-id="Jini.Refactor.Actions" anchor="first"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;                <add-to-group group-id="AnalyzeActions" anchor="first"/>&ndash;&gt;-->
+            <!--            </action>-->
+        </group>
+        <!--        </group>-->
+    </actions>
+
+
+</idea-plugin>
+
+
+
