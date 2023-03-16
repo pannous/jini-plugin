@@ -1,0 +1,5 @@
+0000000000000000000000000000000000000000 340784b8e116f2a9448aeaf7ecdf459fe8c6e9e7 pannous <info@pannous.com> 1678383902 +0100	commit (initial): 1.0
+340784b8e116f2a9448aeaf7ecdf459fe8c6e9e7 ab8bec990d0a2e9040de962dbed378ed0dff0f38 pannous <info@pannous.com> 1678387535 +0100	commit: 1.0
+ab8bec990d0a2e9040de962dbed378ed0dff0f38 8628fff483f16ccc6db0de9377baae5f4790ff33 pannous <info@pannous.com> 1678387748 +0100	commit: before remove OpenAI3
+8628fff483f16ccc6db0de9377baae5f4790ff33 adb3da13cc6fc96e550b8be5a5a9e446986e5700 pannous <info@pannous.com> 1678869489 +0100	commit:
+adb3da13cc6fc96e550b8be5a5a9e446986e5700 adb3da13cc6fc96e550b8be5a5a9e446986e5700 pannous <info@pannous.com> 1678869556 +0100	Branch: renamed refs/heads/master to refs/heads/main

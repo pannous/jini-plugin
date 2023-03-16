@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="/usr/local/Cellar/gradle/8.0.2/libexec" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/openai-java" />
+        <option name="gradleHome" value="/usr/local/Cellar/gradle/8.0.2/libexec" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/openai-java" />
+            <option value="$PROJECT_DIR$/openai-java/api" />
+            <option value="$PROJECT_DIR$/openai-java/client" />
+            <option value="$PROJECT_DIR$/openai-java/example" />
+            <option value="$PROJECT_DIR$/openai-java/service" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/openai-java/api" />
+        <option name="gradleHome" value="/usr/local/Cellar/gradle/8.0.2/libexec" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/openai-java/api" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/openai-java/client" />
+        <option name="gradleHome" value="/usr/local/Cellar/gradle/8.0.2/libexec" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/openai-java/client" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/openai-java/service" />
+        <option name="gradleHome" value="/usr/local/Cellar/gradle/8.0.2/libexec" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/openai-java/service" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
