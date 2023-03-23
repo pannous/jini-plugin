@@ -68,14 +68,13 @@
                   topic="jetbrains.buildServer.messages.serviceMessages.CompilationFinished"/>
 
     </applicationListeners>
-
     <actions>
         <group id="Jini.Refactor.Actions" description="Jini refactor actions">
             <add-to-group group-id="RefactoringMenu" anchor="first"/>
         </group>
 
         <group id="Jini.Actions" description="Jini AI Actions">
-            <action id="Jini.Explain" class="com.pannous.jini.Explain"
+            <action icon="AllIcons.Actions.IntentionBulbGrey" id="Jini.Explain" class="com.pannous.jini.Explain"
                     text="Explain" description="Explains the selected text, code or error.">
                 <add-to-group group-id="EditorPopupMenu" anchor="first"/>
                 add-to-group group-id="Jini.Refactor.Actions" anchor="first"/>
@@ -84,9 +83,9 @@
                 <keyboard-shortcut keymap="$default" first-keystroke="shift meta E"/>
             </action>
 
-            <action id="Fix" class="com.pannous.jini.Fix"
+            <action icon="AllIcons.Actions.IntentionBulbGrey" id="Fix" class="com.pannous.jini.Fix"
                     text="Fix" description="Try to fix the currently selected code or error using OpenAI.">
-                <!--                    icon="/icons/fix.png"-->
+                <!--                    -->
 
                 >
                 <synonym text="Correct Mistake"/>
@@ -98,7 +97,8 @@
             </action>
 
 
-            <action id="com.pannous.jini.Edit" class="com.pannous.jini.Edit" text="Custom AI Refactor…"
+            <action icon="AllIcons.Actions.IntentionBulbGrey" id="com.pannous.jini.Edit" class="com.pannous.jini.Edit"
+                    text="Custom AI Refactor…"
                     description="Let OpenAI do a code refinement of the selected elements with given user instructions.">
                 <synonym text="Refine"/>
                 <synonym text="Refactor"/>
@@ -120,7 +120,8 @@
                 <add-to-group group-id="Jini.Refactor.Actions" anchor="first"/>
             </action>
 
-            <action id="com.pannous.jini.Transpile" class="com.pannous.jini.Transpile"
+            <action icon="AllIcons.Actions.IntentionBulbGrey" id="com.pannous.jini.Transpile"
+                    class="com.pannous.jini.Transpile"
                     text="Transpile to Target Language"
                     description="Let GPT do a code review of the selected elements.">
                 <synonym text="Convert"/>
@@ -131,7 +132,8 @@
 
             </action>
 
-            <action id="com.pannous.jini.Complete" class="com.pannous.jini.Complete"
+            <action icon="AllIcons.Actions.IntentionBulbGrey" id="com.pannous.jini.Complete"
+                    class="com.pannous.jini.Complete"
                     text="OpenAI Code Complete…"
                     description="Complete the statement using OpenAI"
             >
@@ -143,7 +145,8 @@
             </action>
 
 
-            <action id="com.pannous.jini.Execute" class="com.pannous.jini.Execute"
+            <action icon="AllIcons.Actions.IntentionBulbGrey" id="com.pannous.jini.Execute"
+                    class="com.pannous.jini.Execute"
                     text="English System Command…"
                     description="⚠️ Run system command as interpreted by OpenAI"
             >
@@ -160,7 +163,8 @@
             </action>
 
 
-            <action id="com.pannous.jini.Review" class="com.pannous.jini.Review" text="Code Review via AI"
+            <action icon="AllIcons.Actions.IntentionBulbGrey" id="com.pannous.jini.Review"
+                    class="com.pannous.jini.Review" text="Code Review via AI"
                     description="Let GPT do a code review of the selected elements.">
                 <synonym text="Improve"/>
                 <synonym text="Enhance"/>
@@ -177,18 +181,21 @@
             </action>
 
 
-            <action id="com.pannous.jini.Documentation" class="com.pannous.jini.Documentation"
+            <action icon="AllIcons.Actions.IntentionBulbGrey" id="com.pannous.jini.Documentation"
+                    class="com.pannous.jini.Documentation"
                     text="Write Documentation"
                     description="Let GPT write documentation the selected elements.">
                 <add-to-group group-id="AnalyzeActions" anchor="first"/>
             </action>
 
-            <action id="com.pannous.jini.Tests" class="com.pannous.jini.Tests" text="Write Tests"
+            <action icon="AllIcons.Actions.IntentionBulbGrey" id="com.pannous.jini.Tests" class="com.pannous.jini.Tests"
+                    text="Write Tests"
                     description="Let GPT write tests for the selected elements.">
                 <add-to-group group-id="AnalyzeActions" anchor="first"/>
             </action>
 
-            <action id="com.pannous.jini.Discuss" class="com.pannous.jini.Discuss" text="Discuss Code Fragments"
+            <action icon="AllIcons.Actions.IntentionBulbGrey" id="com.pannous.jini.Discuss"
+                    class="com.pannous.jini.Discuss" text="Discuss Code Fragments"
                     description="Chat with GPT over your program (or anything).">
                 <add-to-group group-id="AnalyzeActions" anchor="first"/>
                 <synonym text="Discuss"/>
@@ -201,7 +208,8 @@
             </action>
 
 
-            <action id="com.pannous.jini.Optimize" class="com.pannous.jini.Optimize" text="Optimize Code in Place"
+            <action icon="lamp.png" id="com.pannous.jini.Optimize" class="com.pannous.jini.Optimize"
+                    text="Optimize Code in Place"
                     description="Let GPT automatically optimize the selected elements.">
                 <synonym text="Improve"/>
                 <synonym text="Enhance"/>
@@ -213,28 +221,13 @@
                 <synonym text="Upgrade"/>
                 <synonym text="Clarify"/>
                 <synonym text="Analyze"/>
+
                 <add-to-group group-id="Jini.Refactor.Actions" anchor="first"/>
                 <add-to-group group-id="AnalyzeActions" anchor="first"/>
             </action>
 
-            <!--            <action id="com.pannous.jini.Improve" class="com.pannous.jini.Improve" text="Improve Code in Place"-->
-            <!--                    description="Let GPT automatically improve the selected elements.">-->
-            <!--                <synonym text="Improve"/>-->
-            <!--                <synonym text="Enhance"/>-->
-            <!--                <synonym text="Optimize"/>-->
-            <!--                <synonym text="Better"/>-->
-            <!--                <synonym text="Revamp"/>-->
-            <!--                <synonym text="Polish"/>-->
-            <!--                <synonym text="Clean"/>-->
-            <!--                <synonym text="Upgrade"/>-->
-            <!--                <synonym text="Comment"/>-->
-            <!--                <synonym text="Clarify"/>-->
-            <!--                <synonym text="Analyze"/>-->
-            <!--&lt;!&ndash;                <add-to-group group-id="Jini.Refactor.Actions" anchor="first"/>&ndash;&gt;-->
-            <!--&lt;!&ndash;                <add-to-group group-id="AnalyzeActions" anchor="first"/>&ndash;&gt;-->
-            <!--            </action>-->
+
         </group>
-        <!--        </group>-->
     </actions>
 
 

@@ -16,6 +16,8 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
+verification*
+
 ### Eclipse ###
 .apt_generated
 .classpath
@@ -44,3 +46,4 @@ src/main/java/com/pannous/jini/settings/ApiKeys.java
 .idea
 .DS_Store
 apikeys
+src/main/java/com/theokanning

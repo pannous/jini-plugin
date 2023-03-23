@@ -35,10 +35,9 @@ import java.awt.datatransfer.Transferable;
 import java.io.IOException;
 import java.util.function.Consumer;
 
+import static com.pannous.jini.openai.OpenAI.extractInlineCode;
 import static com.pannous.jini.settings.Options.replace;
 
-
-//  💡 This is a single-line comment in the TextMate language. It is used to add notes or explanations to the code that are not executed by the computer.
 
 // Hi
 
@@ -66,10 +65,11 @@ public abstract class Action extends AnAction {
         if (editor == null) return;
         if (caret == null) return;
         AppSettingsState settings = AppSettingsState.getInstance();
+
         ApplicationManager.getApplication().invokeLater(() -> {
-            String text = result.replaceAll("```\\w*\\s*", ""); // remove language hint
+            String text = extractInlineCode(result);
             if (settings == null || settings.autoPopup)
-                Messages.showMessageDialog(project, result, "AI Result", Messages.getInformationIcon());
+                Messages.showMessageDialog(project, text, "AI Result", Messages.getInformationIcon());
             int selectionStart = caret.getSelectionStart();
             int offset = selectionStart;
             int selectionEnd = caret.getSelectionEnd();
@@ -80,7 +80,7 @@ public abstract class Action extends AnAction {
                     offset = selectionEnd;
                 } else {
                     if (options.has(Options.comment) || !options.has(Options.insert_after)) {
-                        text = "\n" + formatComment(getLanguage(editor), result);
+                        text = "\n" + formatComment(getLanguage(editor), text);
                     }
                     if (options.has(Options.insert_before)) {
                         caret.selectLineAtCaret();
@@ -101,7 +101,6 @@ public abstract class Action extends AnAction {
     }
 
     void updateToolWindow(String result, Project project) {
-
         ApplicationManager.getApplication().invokeLater(() -> {
             try {
                 final ToolWindow toolWindow = ToolWindowManager.getInstance(project).getToolWindow("Jini");

@@ -11,17 +11,20 @@ import com.pannous.jini.settings.Options;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.function.Consumer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import static com.pannous.jini.openai.OpenAI.extractCodes;
 
 
 public class Execute extends Action {
 
     void run(String code, Project project) throws IOException {
         // run code in terminal
+        updateToolWindow(code, project);
         Process process = Runtime.getRuntime().exec(code);
-        String result = new String(process.getInputStream().readAllBytes(), "UTF-8"); // proc output => input FOR US!
+        String result = new String(process.getInputStream().readAllBytes(), StandardCharsets.UTF_8); // proc output => input FOR US!
+        updateToolWindow(result, project);
         ApplicationManager.getApplication().invokeLater(() -> {
             Messages.showMessageDialog(project, result, "result", Messages.getInformationIcon());
         });
@@ -41,21 +44,11 @@ public class Execute extends Action {
 //                processHandler.startNotify();
 //    }
 
+
     void execution(Project project, String codes) {
         try {
             if (codes.isEmpty()) return;
-            if (!codes.contains("```")) {
-                run(codes, project); // DANGER!
-                return;
-            }
-            String pattern = "```bash\\s+(.*?)```";
-            Pattern p = Pattern.compile(pattern, Pattern.DOTALL);
-            Matcher m = p.matcher(codes);
-            while (m.find()) {
-                String code = m.group(1);
-                if (code.isEmpty()) return;
-                run(code, project);
-            }
+            run(codes, project);
         } catch (Exception e) {
             ApplicationManager.getApplication().invokeLater(() -> {
                 Messages.showMessageDialog(project, e.getMessage(), "Error", Messages.getErrorIcon());
@@ -83,6 +76,8 @@ public class Execute extends Action {
             execution(project, result);
         };
         Consumer<String> doublecheck = (result) -> {
+            updateToolWindow(result, project);
+            result = extractCodes(result);
             confirm("Execute shell script", result, result, doit);
         };
         new OpenAI().query(project, prompt, userInput, "bash", doublecheck, Options.none);

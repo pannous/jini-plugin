@@ -17,18 +17,22 @@ public class AppSettingsComponent {
 
     private final JPanel myMainPanel;
     private final JBPasswordField OPENAI_API_KEY = new JBPasswordField();
+    private final JLabel getApiKey = new JLabel("<p><a href='https://platform.openai.com/account/api-keys'>Get API key</a></p>");
+    private final JLabel apiStatusLink = new JLabel("<p><a href='https://status.openai.com/'>API status</a></p>");
+
     private final JBCheckBox autoPopup = new JBCheckBox("Show popup of OpenAI answers");
     private final JBCheckBox autoAddComments = new JBCheckBox("Allow adding comments to the code from OpenAI");
     private final JBCheckBox autoReplaceCode = new JBCheckBox("Allow auto-replace code with OpenAI suggestions");
     private final JBCheckBox autoSaveToNewFile = new JBCheckBox("Write transformed code to new file");
     private final JBTextField customRefactor = new JBTextField("Custom command to refactor selected code");
-
 //    private final JBTextField targetLanguage = new JBTextField("Target language of transpilation code");
 //    private final JBCheckBox autoExecuteCommands = new JBCheckBox("⚠️ Automatically execute commands from OpenAI");
 
     public AppSettingsComponent() {
         myMainPanel = FormBuilder.createFormBuilder()
                 .addLabeledComponent(new JBLabel("OPENAI_API_KEY"), OPENAI_API_KEY, 1, false)
+                .addComponent(getApiKey, 1)
+                .addComponent(apiStatusLink, 1)
                 .addSeparator()
                 .addComponent(autoPopup, 1)
                 .addComponent(autoAddComments, 1)
