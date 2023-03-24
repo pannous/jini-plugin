@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.pannous"
-version = "1.2.3.016"
+version = "1.2.3.018"
 
 shadowJar {
     archiveClassifier.set("all")

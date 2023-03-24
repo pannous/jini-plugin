@@ -44,8 +44,10 @@ public class OpenAiAPI {
         String messages;
         if (content.startsWith("["))
             messages = content;
-        else
-            messages = "[{\"role\": \"user\", \"content\": \"" + content.replace("\"", "'") + "\"}]";
+        else {
+            String safe_message = content.replace("\"", "'").replace("\n", "\\n");
+            messages = "[{\"role\": \"user\", \"content\": \"" + safe_message + "\"}]";
+        }
 
         String json = "{\n" +
                 "     \"model\": \"gpt-3.5-turbo\",\n" +

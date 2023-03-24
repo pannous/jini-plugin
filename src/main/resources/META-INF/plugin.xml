@@ -16,7 +16,7 @@
     <br>
     <br>
     Currently powered by ChatGPT-3.5 via OpenAI API, trial key provided<br>
-    Use with your own key from <a href="https://platform.openai.com/account/api-keys">https://platform.openai.com/account/api-keys</a>
+    Use with your own key from <a href="https://platform.openai.com/account/api-keys">https://platform.openai.com/account/api-keys</a><br/>
     <br>
     • <b>Explain</b>: Get explanations for any code file or segment through OpenAI API.<br>
     • <b>Fix</b>: Let ChatGPT analyze and explain compiler build error messages and suggest fixes.<br>
@@ -229,7 +229,10 @@
 
         </group>
     </actions>
-
+    <change-notes>
+        Fixed multiline requests
+    </change-notes>
+    <!--    https://plugins.jetbrains.com/plugin/21229-jini-->
 
 </idea-plugin>
 
