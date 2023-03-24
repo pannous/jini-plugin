@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.pannous"
-version = "1.2.3.015"
+version = "1.2.3.016"
 
 shadowJar {
     archiveClassifier.set("all")
@@ -77,7 +77,7 @@ tasks {
     targetCompatibility = "17"
 
     patchPluginXml {
-        sinceBuild.set("213")
+        sinceBuild.set("222")
         untilBuild.set("223.*")
 //        sinceBuild.set("223")
 //        untilBuild.set("999.*")

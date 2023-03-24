@@ -31,8 +31,8 @@ public class AppSettingsComponent {
     public AppSettingsComponent() {
         myMainPanel = FormBuilder.createFormBuilder()
                 .addLabeledComponent(new JBLabel("OPENAI_API_KEY"), OPENAI_API_KEY, 1, false)
-                .addComponent(getApiKey, 1)
-                .addComponent(apiStatusLink, 1)
+//                .addComponent(getApiKey, 1)
+//                .addComponent(apiStatusLink, 1)
                 .addSeparator()
                 .addComponent(autoPopup, 1)
                 .addComponent(autoAddComments, 1)

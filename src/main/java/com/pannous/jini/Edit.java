@@ -30,7 +30,7 @@ public class Edit extends Action {
             userInput = Messages.showInputDialog("How to modify the selected code", "Instructions", Messages.getQuestionIcon(), command, null);
             if (userInput == null) return;
         }
-        performAction(e, new Prompt(Prompt.EDIT + userInput), Options.replace);
+        performAction(e, new Prompt(Prompt.EDIT.getText() + userInput), Options.replace);
         settings.customRefactor = userInput;
         ApplicationManager.getApplication().invokeLater(() -> {
             ((PersistentStateComponent<AppSettingsState>) settings).getState();// saves settings!

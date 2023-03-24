@@ -61,7 +61,8 @@ public class OpenAiAPI {
 //JsonObject jsonObject = reader.readObject();
         // parse response json
 
-        return response.trim();
+        return response.replace("\\n", "\n").trim();
+
     }
 
 }
