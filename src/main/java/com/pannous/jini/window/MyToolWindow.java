@@ -27,7 +27,8 @@ public class MyToolWindow extends SimpleToolWindowPanel implements JiniListener,
     private JButton hideButton;
     private JPanel panel;
     private JScrollPane scrollPane;
-    private JTextField input;
+//    private JBScrollPane scrollPane;
+private JTextField input;
     private JTextPane result;
 
 
@@ -58,7 +59,7 @@ public class MyToolWindow extends SimpleToolWindowPanel implements JiniListener,
     // this should be auto generated!?!
     private void $$$setupUI$$$() {
         panel = new JPanel();
-        panel.setLayout(new GridLayoutManager(2, 5, new Insets(0, 0, 0, 0), -1, -1));
+        panel.setLayout(new GridLayoutManager(2, 5, new Insets(0, 2, 0, 0), -1, -1));
         final JLabel label1 = new JLabel();
         label1.setText("Input");
         panel.add(label1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -66,17 +67,26 @@ public class MyToolWindow extends SimpleToolWindowPanel implements JiniListener,
         panel.add(input, new GridConstraints(1, 1, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, new Dimension(150, -1), null, null, 0, false));
         sendButton = new JButton();
         sendButton.setText("Submit");
-        panel.add(sendButton, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        int shrink_or_grow = GridConstraints.SIZEPOLICY_CAN_GROW | GridConstraints.SIZEPOLICY_CAN_SHRINK;
+        panel.add(sendButton, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, shrink_or_grow, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         hideButton = new JButton();
         hideButton.setText("Hide");
-        panel.add(hideButton, new GridConstraints(1, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel.add(hideButton, new GridConstraints(1, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, shrink_or_grow, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 
         result = new JTextPane();
-        result.setEditable(false);
+        result.setEditable(true);
+//
+//        JPanel clutch = new JPanel();
+//        clutch.add(result, BorderLayout.CENTER);
 
-        JBScrollPane scroll_result = new JBScrollPane(result, JBScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JBScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane = new JBScrollPane(result, JBScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVisible(true);
+//        scrollPane.setViewportView(result);
 
-        panel.add(scroll_result, new GridConstraints(0, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.FILL_BOTH, GridConstraints.FILL_BOTH, new Dimension(150, 50), null, null, 0, false));
+        Dimension dim = new Dimension(400, 400);
+//        panel.add(scrollPane, new GridConstraints(0, 0, 1, 5, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, dim, null,null, 0, true));
+        panel.add(scrollPane, new GridConstraints(0, 0, 1, 5, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_BOTH, shrink_or_grow, shrink_or_grow, dim, null, null, 0, true));
+
     }
 
     public void submit() {

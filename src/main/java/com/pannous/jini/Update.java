@@ -34,34 +34,14 @@ public class Update extends AnAction {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-
         PluginManager pluginManager = PluginManager.getInstance();
         IdeaPluginDescriptor jini = pluginManager.findEnabledPlugin(PluginId.getId(jini_id));
         IdeaPluginDescriptorImpl pluginDescriptor = (IdeaPluginDescriptorImpl) jini;
-
-        boolean b = pluginDescriptor.allowBundledUpdate();
-//        pluginDescriptor.setAllowBundledUpdate(true);
         pluginDescriptor.setEnabled(false);
         Path finalPath = path;
-//        PluginInstaller.addStateListener(newState -> {
-//        });
-//        PluginInstaller.uninstallDynamicPlugin(null, pluginDescriptor, true);
         PluginInstaller.installAndLoadDynamicPlugin(finalPath, pluginDescriptor);
-
-        PluginInstaller.addStateListener(newState -> {
-            PluginManager.enablePlugin(pluginDescriptor.getPluginId().getIdString());
-            Application application = ApplicationManager.getApplication();
-            application.restart();
-        });
-
-//         disable the plugin
-//        pluginManager.disablePlugin("Jini");
-
-//        PluginInstaller.addStateListener(newState -> {
-//            System.out.println("newState = " + newState);
-//            PluginInstaller.installAndLoadDynamicPlugin(path, pluginDescriptor);
-//            pluginManager.enablePlugin(jini_id);
-//        });
-//        PluginInstaller.uninstallDynamicPlugin(null, pluginDescriptor, true);
+        PluginManager.enablePlugin(pluginDescriptor.getPluginId().getIdString());
+        Application application = ApplicationManager.getApplication();
+        application.restart();
     }
 }
