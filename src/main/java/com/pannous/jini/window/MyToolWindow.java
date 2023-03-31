@@ -75,18 +75,12 @@ private JTextField input;
 
         result = new JTextPane();
         result.setEditable(true);
-//
-//        JPanel clutch = new JPanel();
-//        clutch.add(result, BorderLayout.CENTER);
 
         scrollPane = new JBScrollPane(result, JBScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVisible(true);
-//        scrollPane.setViewportView(result);
 
         Dimension dim = new Dimension(400, 400);
-//        panel.add(scrollPane, new GridConstraints(0, 0, 1, 5, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, dim, null,null, 0, true));
         panel.add(scrollPane, new GridConstraints(0, 0, 1, 5, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_BOTH, shrink_or_grow, shrink_or_grow, dim, null, null, 0, true));
-
     }
 
     public void submit() {

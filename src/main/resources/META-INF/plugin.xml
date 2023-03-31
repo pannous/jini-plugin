@@ -232,10 +232,9 @@
         </group>
     </actions>
     <change-notes>
-        Ready for IntelliJ 2023 release
-
-        Shows suggested contend to be approved in Diff Manager
-
+        • Ready for IntelliJ 2023 releases
+        • Fixed scrolling
+        • Shows suggested contend in Diff Manager for approval
     </change-notes>
     <!--    https://plugins.jetbrains.com/plugin/21229-jini-->
 
