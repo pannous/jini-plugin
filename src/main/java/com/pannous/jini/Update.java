@@ -24,24 +24,24 @@ public class Update extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
-        String jini_id = "com.pannous.jini-plugin";
-        Path path = Path.of("/Users/me/dev/apps/jini-plugin/build/libs/");
-        try {
-            Optional<Path> mostRecentJar = Files.list(path)
-                    .filter(p -> p.toString().endsWith(".jar"))
-                    .max(Comparator.comparingLong(p -> p.toFile().lastModified()));
-            path = mostRecentJar.get();
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
-        PluginManager pluginManager = PluginManager.getInstance();
-        IdeaPluginDescriptor jini = pluginManager.findEnabledPlugin(PluginId.getId(jini_id));
-        IdeaPluginDescriptorImpl pluginDescriptor = (IdeaPluginDescriptorImpl) jini;
-        pluginDescriptor.setEnabled(false);
-        Path finalPath = path;
-        PluginInstaller.installAndLoadDynamicPlugin(finalPath, pluginDescriptor);
-        PluginManager.enablePlugin(pluginDescriptor.getPluginId().getIdString());
-        Application application = ApplicationManager.getApplication();
-        application.restart();
+//        String jini_id = "com.pannous.jini-plugin";
+//        Path path = Path.of("/Users/me/dev/apps/jini-plugin/build/libs/");
+//        try {
+//            Optional<Path> mostRecentJar = Files.list(path)
+//                    .filter(p -> p.toString().endsWith(".jar"))
+//                    .max(Comparator.comparingLong(p -> p.toFile().lastModified()));
+//            path = mostRecentJar.get();
+//        } catch (IOException ex) {
+//            throw new RuntimeException(ex);
+//        }
+//        PluginManager pluginManager = PluginManager.getInstance();
+//        IdeaPluginDescriptor jini = pluginManager.findEnabledPlugin(PluginId.getId(jini_id));
+//        IdeaPluginDescriptorImpl pluginDescriptor = (IdeaPluginDescriptorImpl) jini;
+//        pluginDescriptor.setEnabled(false);
+//        Path finalPath = path;
+//        PluginInstaller.installAndLoadDynamicPlugin(finalPath, pluginDescriptor);
+//        PluginManager.enablePlugin(pluginDescriptor.getPluginId().getIdString());
+//        Application application = ApplicationManager.getApplication();
+//        application.restart();
     }
 }
