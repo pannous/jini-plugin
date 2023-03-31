@@ -26,7 +26,7 @@
     • <b>Documentation</b>: Get inline code documentation<br>
     • <b>Review</b>: Learn how to improve your code by getting review suggestions through OpenAI API.<br>
     <br>
-    Preview Beta Features:<br>
+    Copilot X like functionality and preview beta features:<br>
     • <b>Code</b>: Specify functionality in English and let ChatGPT write the code. (beta!)  <br>
     • <b>Complete</b>: Get inline code completion suggestions through OpenAI API.(beta!) <br>
     • <b>Tests</b>: Generate tests for selected file or code<br>
@@ -225,12 +225,17 @@
                 <add-to-group group-id="Jini.Refactor.Actions" anchor="first"/>
                 <add-to-group group-id="AnalyzeActions" anchor="first"/>
             </action>
-
-
+            <action class="com.pannous.jini.Update" id="com.pannous.jini.Update"
+                    text="Update Jini Plugin"
+                    description="Load Jini Update from filesystem or beta chanel">
+            </action>
         </group>
     </actions>
     <change-notes>
-        Fixed multiline requests
+        Ready for IntelliJ 2023 release
+
+        Shows suggested contend to be approved in Diff Manager
+
     </change-notes>
     <!--    https://plugins.jetbrains.com/plugin/21229-jini-->
 

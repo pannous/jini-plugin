@@ -46,6 +46,7 @@ public class OpenAiAPI {
             messages = content;
         else {
             String safe_message = content.replace("\"", "'").replace("\n", "\\n");
+//            we could use "content":``` + safe_message + "``` but then we need to escape the backticks in the content
             messages = "[{\"role\": \"user\", \"content\": \"" + safe_message + "\"}]";
         }
 

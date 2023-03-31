@@ -8,6 +8,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.openapi.wm.ToolWindow;
+import com.intellij.ui.components.JBScrollPane;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.util.messages.MessageBus;
@@ -71,12 +72,13 @@ public class MyToolWindow extends SimpleToolWindowPanel implements JiniListener,
 
         result = new JTextArea();
         result.setLineWrap(true);
+        result.setWrapStyleWord(true);
+        result.setEditable(false);
 
-        JScrollPane scroll_result = new JScrollPane(result, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        JBScrollPane scroll_result = new JBScrollPane(result, JBScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JBScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-//        result.wrappingStyle = JTextPane.WRAPPING_STYLE_WORD;
-        panel.add(scroll_result, new GridConstraints(0, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(150, 50), null, null, 0, false));
 
+        panel.add(scroll_result, new GridConstraints(0, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, new Dimension(150, 50), null, null, 0, false));
     }
 
     public void submit() {

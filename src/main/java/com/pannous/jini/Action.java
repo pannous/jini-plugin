@@ -1,8 +1,10 @@
 package com.pannous.jini;
 
+import com.intellij.history.integration.ui.actions.ShowHistoryAction;
 import com.intellij.lang.Commenter;
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageCommenters;
+import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
@@ -46,20 +48,21 @@ public abstract class Action extends AnAction {
 
     private static String formatComment(Language language, String result) {
         Commenter commenter = LanguageCommenters.INSTANCE.forLanguage(language);
-        String prefix = commenter.getCommentedBlockCommentPrefix();
-        String suffix = commenter.getCommentedBlockCommentSuffix();
-        if (prefix == null) {
-            prefix = commenter.getLineCommentPrefix();
-            result = result.replaceAll("\n", "\n" + prefix);
+        String prefix = "//";
+        String suffix = "";
+        if (commenter != null) {
+            prefix = commenter.getCommentedBlockCommentPrefix();
+            suffix = commenter.getCommentedBlockCommentSuffix();
+            if (prefix == null) prefix = commenter.getLineCommentPrefix();
+            if (prefix == null) prefix = "//";// ⚠️ how?
         }
-        if (prefix == null) prefix = "// ";// ⚠️ how?
+        result = result.replaceAll("\n", "\n" + prefix);
         if (suffix != null) result = result.replace(suffix, "");
-        else suffix = "";
         String lamp = " \uD83D\uDCA1 "; // 💡
         return prefix + lamp + result + suffix + "\n";
     }
 
-    public static void writeResult(Project project, Editor editor, Caret caret, String result, Prompt prompt, Options options) {
+    public static void writeResult(Project project, Editor editor, Caret caret, String result, Prompt prompt, Options options, @NotNull AnActionEvent event) {
         if (result == null || result.isEmpty()) return;
 
         if (editor == null) return;
@@ -92,12 +95,22 @@ public abstract class Action extends AnAction {
             int finalOffset = offset;
             String finalText = text;
             ApplicationManager.getApplication().runWriteAction(() -> WriteCommandAction.runWriteCommandAction(project, () -> {
-                if (options.has(replace))
-                    editor.getDocument().replaceString(selectionStart, selectionEnd, finalText);
-                else if (options.has(Options.insert_before) || settings!=null && settings.autoAddComments)
+                if (options.has(replace)) {
+
+                    Merger.showMerger(project, editor, selectionStart, selectionEnd, finalText);
+//                    editor.getDocument().replaceString(selectionStart, selectionEnd, finalText);
+//                    showDiff(event);
+                } else if (options.has(Options.insert_before) || settings != null && settings.autoAddComments)
                     editor.getDocument().insertString(finalOffset, finalText);
             }));
         });
+    }
+
+    private static void showDiff(@NotNull AnActionEvent event) {
+        // Open the history for the current file
+        ActionManager actionManager = ActionManager.getInstance();
+        ShowHistoryAction showHistoryAction = (ShowHistoryAction) actionManager.getAction("ShowHistory");
+        showHistoryAction.actionPerformed(event);
     }
 
     void updateToolWindow(String result, Project project) {
@@ -204,7 +217,7 @@ public abstract class Action extends AnAction {
         } else
             callback = (result) -> {
                 updateToolWindow(result, project);
-                writeResult(project, editor, caret, result, prompt, options);
+                writeResult(project, editor, caret, result, prompt, options, event);
             };
         OpenAI.query(project, prompt, selectedText, language.getDisplayName(), callback, replace);
     }

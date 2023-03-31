@@ -5,7 +5,19 @@ plugins {
 }
 
 group = "com.pannous"
-version = "1.2.3.018"
+
+version = "1.2.3.$subversion"
+
+task incrementVersion {
+    Properties ext = new Properties()
+    File propsFile = new File('gradle.properties')
+    ext.load(propsFile.newDataInputStream())
+//    Integer nextbuildnum = ( ((ext.getProperty('subversion')) as BigDecimal) + 1 )
+//    ext.setProperty('subversion', nextbuildnum.toString())
+    ext.subversion = (Integer.parseInt(ext.subversion) + 1).toString()
+    ext.store(propsFile.newWriter(), null)
+    ext.load(propsFile.newDataInputStream())
+}
 
 shadowJar {
     archiveClassifier.set("all")
@@ -78,7 +90,7 @@ tasks {
 
     patchPluginXml {
         sinceBuild.set("222")
-        untilBuild.set("223.*")
+        untilBuild.set("231.*")
 //        sinceBuild.set("223")
 //        untilBuild.set("999.*")
 
