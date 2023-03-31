@@ -153,6 +153,8 @@ public abstract class Action extends AnAction {
         String newFileName;
         if (prompt.getText().contains(Prompt.CONVERT.getText())) {
             newFileName = file.getNameWithoutExtension() + "." + prompt.language;
+        } else if (prompt == Prompt.TESTS) {
+            newFileName = file.getNameWithoutExtension() + "Test." + file.getExtension();
         } else {
             newFileName = file.getNameWithoutExtension() + "_new." + file.getExtension();
         }
