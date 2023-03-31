@@ -26,8 +26,9 @@ public class MyToolWindow extends SimpleToolWindowPanel implements JiniListener,
     private JButton sendButton;
     private JButton hideButton;
     private JPanel panel;
+    private JScrollPane scrollPane;
     private JTextField input;
-    private JTextArea result;
+    private JTextPane result;
 
 
     @Override
@@ -70,15 +71,12 @@ public class MyToolWindow extends SimpleToolWindowPanel implements JiniListener,
         hideButton.setText("Hide");
         panel.add(hideButton, new GridConstraints(1, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 
-        result = new JTextArea();
-        result.setLineWrap(true);
-        result.setWrapStyleWord(true);
+        result = new JTextPane();
         result.setEditable(false);
 
         JBScrollPane scroll_result = new JBScrollPane(result, JBScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JBScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-
-        panel.add(scroll_result, new GridConstraints(0, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, new Dimension(150, 50), null, null, 0, false));
+        panel.add(scroll_result, new GridConstraints(0, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.FILL_BOTH, GridConstraints.FILL_BOTH, new Dimension(150, 50), null, null, 0, false));
     }
 
     public void submit() {
@@ -104,5 +102,9 @@ public class MyToolWindow extends SimpleToolWindowPanel implements JiniListener,
 
     @Override
     public void dispose() {
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }
