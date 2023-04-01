@@ -1,4 +1,4 @@
-# Jini: copilot plugin for all Jetbrains IDEs
+# Jini: Copilot Plugin for all Jetbrains IDEs
 
 Copilot X like features for Jetbrains IDEs using ChatGpt and GPT-4:
 
