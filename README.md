@@ -22,5 +22,5 @@ Copilot X like features for Jetbrains IDEs using ChatGpt and GPT-4:
 * Clion
 * ...
 
-## Download and install:
+## Download and Install:
 https://plugins.jetbrains.com/plugin/21229-jini
