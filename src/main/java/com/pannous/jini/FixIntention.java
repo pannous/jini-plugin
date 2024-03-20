@@ -40,7 +40,7 @@ public class FixIntention extends BaseElementAtCaretIntentionAction {
 
     @Override
     public @NotNull String getText() {
-        return "AI fix";
+        return "AI Fix";
     }
 
     @Override
@@ -95,9 +95,9 @@ public class FixIntention extends BaseElementAtCaretIntentionAction {
         if (code == null || code.trim().isEmpty())
             code = getCurrentLine(editor);
 
-        element.delete(); // works
+//        element.delete(); // works but not what we want!?
 
-        String message = " FIX: " + code;
+        String message = "FIX code: " + code;
         Prompt prompt = Prompt.FIX;
         Consumer<String> callback;
         updateToolWindow(message, project);
@@ -105,11 +105,11 @@ public class FixIntention extends BaseElementAtCaretIntentionAction {
             ApplicationManager.getApplication().invokeLater(() -> {
 //                com.intellij.util.IncorrectOperationException: Must not change PSI outside command or undo-transparent action.
 //                        element.delete();
+                updateToolWindow(result, project);
+                writeResult(project, editor, caret, result, prompt, Options.replace);
             });
 //            com.intellij.openapi.diagnostic.RuntimeExceptionWithAttachments: Read access is allowed from inside read-action or Event Dispatch Thread (EDT) only (see Application.runReadAction()); see https://jb.gg/ij-platform-threading for details
 
-            updateToolWindow(result, project);
-//            writeResult(project, editor, caret, result, prompt, Options.replace);
         };
         OpenAI2.query(project, prompt, message, language.getDisplayName(), callback, replace);
     }

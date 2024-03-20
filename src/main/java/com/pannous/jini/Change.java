@@ -8,12 +8,14 @@ import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtilCore;
 import com.pannous.jini.openai.OpenAI2;
 import com.pannous.jini.openai.Prompt;
+import com.pannous.jini.settings.AppSettingsState;
 import com.pannous.jini.settings.Options;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,6 +28,8 @@ import static com.pannous.jini.settings.Options.replace;
 
 // popup PROMPT to Change code
 public class Change extends Action implements LocalQuickFix {
+    private String command;
+
     @Override
     public void applyFix(Project project, ProblemDescriptor descriptor) {
 
@@ -41,8 +45,17 @@ public class Change extends Action implements LocalQuickFix {
         Caret caret = editor.getCaretModel().getCurrentCaret();
 
         Options options = Options.replace;
-        AnActionEvent event = null;
-        Prompt prompt = Prompt.FIX;
+        AppSettingsState settings = AppSettingsState.getInstance();
+        if (this.command == null || this.command.isEmpty())
+            this.command = settings.customRefactor;
+        String userInput = Messages.showInputDialog(
+                "How to modify the selected code",
+                "Instructions",
+                Messages.getQuestionIcon(),
+                this.command,
+                null);
+        if (userInput == null) return;
+        Prompt prompt = new Prompt(command);
         Consumer<String> callback;
         callback = (result) -> {
             updateToolWindow(result, project);
@@ -55,7 +68,7 @@ public class Change extends Action implements LocalQuickFix {
 
     @Override
     public @NotNull String getName() {
-        return "AI fix";
+        return "AI Change";
     }
 
     @Override

@@ -29,6 +29,7 @@ public class Update extends AnAction {
     public void actionPerformed(AnActionEvent e) {
         String jini_id = "com.pannous.jini-plugin";
         Path path = downloadLatestJar();
+        System.err.println("Updating Jini plugin to " + path);
         PluginManager pluginManager = PluginManager.getInstance();
         IdeaPluginDescriptor jini = pluginManager.findEnabledPlugin(PluginId.getId(jini_id));
         IdeaPluginDescriptorImpl pluginDescriptor = (IdeaPluginDescriptorImpl) jini;
@@ -53,12 +54,11 @@ public class Update extends AnAction {
         }
 
 //        this HARD method works but is not (always?) necessary:
-//        Application application = ApplicationManager.getApplication();
-//        application.restart();
+        Application application = ApplicationManager.getApplication();
+        application.restart();
     }
 
     private Path downloadLatestJar() {
-
         try {
             String fileUrl = "http://pannous.com/files/intelliJini-plugin-latest.jar";
             URL url = new URL(fileUrl);

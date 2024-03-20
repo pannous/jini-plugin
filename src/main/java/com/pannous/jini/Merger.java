@@ -14,6 +14,7 @@ import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileEditor.TextEditor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Trinity;
 import com.intellij.openapi.vcs.merge.MergeData;
 import com.intellij.openapi.vfs.VirtualFile;
 
@@ -22,9 +23,32 @@ import java.util.stream.Stream;
 
 public class Merger {
 
-    public static void showMerger(Project project, Editor editor, int selectionStart, int selectionEnd, String finalText) {
-        // Create MergeData instance
+
+    public static MergeData loadMergeData() {
+        Trinity<String, String, String> blobs;
         MergeData mergeData = new MergeData();
+//
+//    mergeData.ORIGINAL = originalContent;
+//    mergeData.CURRENT = !isReversed ? yoursContent : theirsContent;
+//    mergeData.LAST = isReversed ? yoursContent : theirsContent;
+//
+//    mergeData.ORIGINAL_REVISION_NUMBER = originalRevision;
+//    mergeData.CURRENT_REVISION_NUMBER = !isReversed ? yoursRevision : theirsRevision;
+//    mergeData.LAST_REVISION_NUMBER = isReversed ? yoursRevision : theirsRevision;
+//
+//    mergeData.ORIGINAL_FILE_PATH = originalPath;
+//    mergeData.CURRENT_FILE_PATH = !isReversed ? yoursPath : theirsPath;
+//    mergeData.LAST_FILE_PATH = isReversed ? yoursPath : theirsPath;
+
+        // THREE WAY MERGE!
+//    val byteContents = listOf(mergeData.CURRENT, mergeData.ORIGINAL, mergeData.LAST)
+//    val contents = DiffUtil.getDocumentContentsForViewer(project, byteContents, filePath, mergeData.CONFLICT_TYPE)
+//    val request = SimpleDiffRequest(title, contents.toList(), titles)
+//    putRevisionInfos(request, mergeData)
+        return mergeData;
+    }
+
+    public static void showMerger(Project project, Editor editor, int selectionStart, int selectionEnd, String finalText) {
         Document document = editor.getDocument();
         VirtualFile file = FileDocumentManager.getInstance().getFile(document);
         assert file != null;

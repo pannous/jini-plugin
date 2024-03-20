@@ -54,7 +54,7 @@ public class MyFix extends Action implements LocalQuickFix {
 
     @Override
     public @NotNull String getName() {
-        return "AI fix";
+        return "AI Fix";
     }
 
     @Override

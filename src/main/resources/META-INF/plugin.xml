@@ -250,24 +250,28 @@
             <category>Fix intentions</category>
             <!--            <descriptionDirectoryName>FixIntention</descriptionDirectoryName>-->
         </intentionAction>
+        <intentionAction>
+            <className>com.pannous.jini.EditIntention</className>
+            <category>Fix intentions</category>
+        </intentionAction>
     </extensions>
 
     <!-- Define the inspection tool -->
-    <!--  <inspectionTool class="com.example.MyInspectionTool" id="MyInspectionTool" group="My Inspections">-->
-    <!--    &lt;!&ndash; Define the problem highlighting for the inspection tool &ndash;&gt;-->
-    <!--    <problemHighlighting>-->
-    <!--      <highlighting id="MyError" severity="ERROR" description="My error highlighting" />-->
-    <!--      &lt;!&ndash; Define the Quick Fixes for the problem highlighting &ndash;&gt;-->
-    <!--      <quickFixes>-->
-    <!--        <localQuickFix-->
-    <!--          name="My Quick Fix"-->
-    <!--          familyName="My Fixes"-->
-    <!--          implementationClass="com.pannous.jini.MyFix"-->
-    <!--          key="MyFix"-->
-    <!--        />-->
-    <!--      </quickFixes>-->
-    <!--    </problemHighlighting>-->
-    <!--  </inspectionTool>-->
+    <!--      <inspectionTool class="com.example.MyInspectionTool" id="MyInspectionTool" group="My Inspections">-->
+    <!--        &lt;!&ndash; Define the problem highlighting for the inspection tool &ndash;&gt;-->
+    <!--        <problemHighlighting>-->
+    <!--          <highlighting id="MyError" severity="ERROR" description="My error highlighting" />-->
+    <!--          &lt;!&ndash; Define the Quick Fixes for the problem highlighting &ndash;&gt;-->
+    <!--          <quickFixes>-->
+    <!--            <localQuickFix-->
+    <!--              name="My Quick Fix"-->
+    <!--              familyName="My Fixes"-->
+    <!--              implementationClass="com.pannous.jini.MyFix"-->
+    <!--              key="MyFix"-->
+    <!--            />-->
+    <!--          </quickFixes>-->
+    <!--        </problemHighlighting>-->
+    <!--      </inspectionTool>-->
 
     <change-notes>
         • fixed code result parser

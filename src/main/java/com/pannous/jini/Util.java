@@ -77,6 +77,11 @@ public class Util {
             String text = extractInlineCode(result);
             if (settings == null || settings.autoPopup)
                 Messages.showMessageDialog(project, text, "AI Result", Messages.getInformationIcon());
+            if (!caret.hasSelection()) {// select line
+                caret.setSelection(caret.getVisualLineStart(), caret.getVisualLineEnd());
+//                caret.selectLineAtCaret(); // todo before, per case?
+                text += "\n"; // ❤️
+            }
             int selectionStart = caret.getSelectionStart();
             int offset = selectionStart;
             int selectionEnd = caret.getSelectionEnd();
@@ -100,7 +105,6 @@ public class Util {
             String finalText = text;
             ApplicationManager.getApplication().runWriteAction(() -> WriteCommandAction.runWriteCommandAction(project, () -> {
                 if (options.has(replace)) {
-
                     Merger.showMerger(project, editor, selectionStart, selectionEnd, finalText);
 //                    editor.getDocument().replaceString(selectionStart, selectionEnd, finalText);
 //                    showDiff(event);

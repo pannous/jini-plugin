@@ -14,12 +14,19 @@ public class Prompt {
     public static final Prompt OPTIMIZE = new Prompt("analyze the code for optimization potential, then optimize the code accordingly");
     public static final Prompt IMPROVE = new Prompt("analyze, code review the following code, then improve and optimize the code accordingly");
     public static final Prompt EDIT = new Prompt("edit the following code using the following instructions: ");
+    public static final Prompt EDIT_CODE_WITH_COMMAND = new Prompt("edit the following code: %s\n" +
+            "using the following instructions: %s");
     public static final Prompt EXECUTE = new Prompt("Given english instructions, find the right terminal command in a zsh shell. The command should be in the following format: ```bash <command>```");
     private final String text;
     public String language;
 
     public Prompt(String text) {
         this.text = text;
+    }
+
+    // using %s not {code} !
+    public String format(String... args) {
+        return String.format(text, args);
     }
 
     public String getText() {
