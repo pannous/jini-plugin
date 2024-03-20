@@ -2,6 +2,11 @@
 
 Copilot X like features for Jetbrains IDEs using ChatGpt and GPT-4:  
 
+## Update 2024
+We thought other 'official' plugins would make this obsolete, however as of March 2024 this is still the only plugin which offers:  
+• Fixing bugs in place  
+• Context actions  
+
 ## Features
 * **Explain**: Get explanations for any code file or segment through OpenAI API.
 * **Fix**: Let ChatGPT analyze and explain compiler build error messages and suggest fixes.
