@@ -14,7 +14,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.function.Consumer;
 
-import static com.pannous.jini.openai.OpenAI.extractCodes;
+import static com.pannous.jini.Util.updateToolWindow;
+import static com.pannous.jini.openai.OpenAITools.extractCodes;
 
 
 public class Execute extends Action {
@@ -80,7 +81,7 @@ public class Execute extends Action {
             result = extractCodes(result);
             confirm("Execute shell script", result, result, doit);
         };
-        new OpenAI().query(project, prompt, userInput, "bash", doublecheck, Options.none);
+        OpenAI.query(project, prompt, userInput, "bash", doublecheck, Options.none);
     }
 }
 

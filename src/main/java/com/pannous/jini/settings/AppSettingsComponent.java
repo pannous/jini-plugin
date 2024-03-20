@@ -2,10 +2,7 @@
 
 package com.pannous.jini.settings;
 
-import com.intellij.ui.components.JBCheckBox;
-import com.intellij.ui.components.JBLabel;
-import com.intellij.ui.components.JBPasswordField;
-import com.intellij.ui.components.JBTextField;
+import com.intellij.ui.components.*;
 import com.intellij.util.ui.FormBuilder;
 
 import javax.swing.*;
@@ -20,6 +17,7 @@ public class AppSettingsComponent {
     private final JLabel getApiKey = new JLabel("<p><a href='https://platform.openai.com/account/api-keys'>Get API key</a></p>");
     private final JLabel apiStatusLink = new JLabel("<p><a href='https://status.openai.com/'>API status</a></p>");
 
+    private final JBList<String> list = new JBList<>();
     private final JBCheckBox autoPopup = new JBCheckBox("Show popup of OpenAI answers");
     private final JBCheckBox autoAddComments = new JBCheckBox("Allow adding comments to the code from OpenAI");
     private final JBCheckBox autoReplaceCode = new JBCheckBox("Allow auto-replace code with OpenAI suggestions");

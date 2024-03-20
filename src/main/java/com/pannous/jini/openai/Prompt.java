@@ -2,18 +2,19 @@ package com.pannous.jini.openai;
 
 
 public class Prompt {
-    public static Prompt CHAT = new Prompt("You are a professional assistant. You are chatting with the programmer about the following topic: ");
-    public static Prompt FIX = new Prompt("analyze and fix the following error");
-    public static Prompt DOCUMENTATION = new Prompt("write documentation for the following code");
-    public static Prompt EXPLAIN = new Prompt("explain and summarize the following");
-    public static Prompt COMPLETE = new Prompt("complete the following code");
-    public static Prompt CONVERT = new Prompt("convert the following code by transpiling it to ");
-    public static Prompt REVIEW = new Prompt("analyze, code review and make suggestions to improve the following code");
-    public static Prompt TESTS = new Prompt("emit tests for the following code");
-    public static Prompt OPTIMIZE = new Prompt("analyze the code for optimization potential, then optimize the code accordingly");
-    public static Prompt IMPROVE = new Prompt("analyze, code review the following code, then improve and optimize the code accordingly");
-    public static Prompt EDIT = new Prompt("edit the following code using the following instructions: ");
-    public static Prompt EXECUTE = new Prompt("Given english instructions, find the right terminal command in a zsh shell. The command should be in the following format: ```bash <command>```");
+    public static final Prompt IMPLEMENT = new Prompt("Act like a professional programmer. From concise requests you infer the intended functionality. First write out the idea in plain text, as a comment in the appropirate programming language. Then write out the code in a function, multiple functions or the appropriate data format (such as xml, json or any other). Now, implement the following specification using code in the mentioned language. ");
+    public static final Prompt CHAT = new Prompt("You are a professional assistant. You are chatting with the programmer about the following topic: ");
+    public static final Prompt FIX = new Prompt("analyze and fix the following error");
+    public static final Prompt DOCUMENTATION = new Prompt("write documentation for the following code");
+    public static final Prompt EXPLAIN = new Prompt("explain and summarize the following");
+    public static final Prompt COMPLETE = new Prompt("complete the following code");
+    public static final Prompt CONVERT = new Prompt("convert the following code by transpiling it to ");
+    public static final Prompt REVIEW = new Prompt("analyze, code review and make suggestions to improve the following code");
+    public static final Prompt TESTS = new Prompt("emit tests for the following code");
+    public static final Prompt OPTIMIZE = new Prompt("analyze the code for optimization potential, then optimize the code accordingly");
+    public static final Prompt IMPROVE = new Prompt("analyze, code review the following code, then improve and optimize the code accordingly");
+    public static final Prompt EDIT = new Prompt("edit the following code using the following instructions: ");
+    public static final Prompt EXECUTE = new Prompt("Given english instructions, find the right terminal command in a zsh shell. The command should be in the following format: ```bash <command>```");
     private final String text;
     public String language;
 

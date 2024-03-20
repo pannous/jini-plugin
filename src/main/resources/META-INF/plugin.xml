@@ -18,17 +18,17 @@
     Currently powered by ChatGPT-3.5 via OpenAI API, trial key provided<br>
     Use with your own key from <a href="https://platform.openai.com/account/api-keys">https://platform.openai.com/account/api-keys</a><br/>
     <br>
-    • <b>Explain</b>: Get explanations for any code file or segment through OpenAI API.<br>
+    • <b>Explain</b>: Get explanations for any code file or segment.<br>
     • <b>Fix</b>: Let ChatGPT analyze and explain compiler build error messages and suggest fixes.<br>
     • <b>Transpile</b>: Convert code to other languages. <br>
     • <b>Execute</b>: English instructions converted to shell commands<br>
     • <b>Custom Edit</b>: Apply custom instructions to modify your code<br>
     • <b>Documentation</b>: Get inline code documentation<br>
-    • <b>Review</b>: Learn how to improve your code by getting review suggestions through OpenAI API.<br>
+    • <b>Review</b>: Learn how to improve your code by getting review suggestions.<br>
     <br>
     Copilot X like functionality and preview beta features:<br>
     • <b>Code</b>: Specify functionality in English and let ChatGPT write the code. (beta!)  <br>
-    • <b>Complete</b>: Get inline code completion suggestions through OpenAI API.(beta!) <br>
+    • <b>Complete</b>: Get inline code completion suggestions.(beta!) <br>
     • <b>Tests</b>: Generate tests for selected file or code<br>
     • <b>Optimize/Improve</b>: Let ChatGPT make your code faster, cleaner and better<br>
     <br>
@@ -84,7 +84,7 @@
             </action>
 
             <action icon="AllIcons.Actions.IntentionBulbGrey" id="Fix" class="com.pannous.jini.Fix"
-                    text="Fix" description="Try to fix the currently selected code or error using OpenAI.">
+                    text="Fix" description="Try to fix the currently selected code or error using AI.">
                 <!--                    -->
 
                 >
@@ -99,7 +99,7 @@
 
             <action icon="AllIcons.Actions.IntentionBulbGrey" id="com.pannous.jini.Edit" class="com.pannous.jini.Edit"
                     text="Custom AI Refactor…"
-                    description="Let OpenAI do a code refinement of the selected elements with given user instructions.">
+                    description="Code refinement of the selected elements with given user instructions.">
                 <synonym text="Refine"/>
                 <synonym text="Refactor"/>
                 <synonym text="Modify"/>
@@ -122,8 +122,8 @@
 
             <action icon="AllIcons.Actions.IntentionBulbGrey" id="com.pannous.jini.Transpile"
                     class="com.pannous.jini.Transpile"
-                    text="Transpile to Target Language"
-                    description="Let GPT do a code review of the selected elements.">
+                    text="Transpile…"
+                    description="Translate source language to destination of your choice">
                 <synonym text="Convert"/>
                 <synonym text="Transpile"/>
                 <synonym text="Translate"/>
@@ -134,8 +134,17 @@
 
             <action icon="AllIcons.Actions.IntentionBulbGrey" id="com.pannous.jini.Complete"
                     class="com.pannous.jini.Complete"
-                    text="OpenAI Code Complete…"
+                    text="AI Code Complete…"
                     description="Complete the statement using OpenAI"
+            >
+                <add-to-group group-id="CodeCompletionGroup" anchor="first"/>
+            </action>
+
+
+            <action icon="AllIcons.Actions.IntentionBulbGrey" id="com.pannous.jini.Code"
+                    class="com.pannous.jini.Code"
+                    text="Implement code according to description…"
+                    description="Write functions or whole files according to specification."
             >
                 <synonym text="Code"/>
                 <synonym text="Write"/>
@@ -144,11 +153,10 @@
                 <add-to-group group-id="CodeCompletionGroup" anchor="first"/>
             </action>
 
-
             <action icon="AllIcons.Actions.IntentionBulbGrey" id="com.pannous.jini.Execute"
                     class="com.pannous.jini.Execute"
                     text="English System Command…"
-                    description="⚠️ Run system command as interpreted by OpenAI"
+                    description="⚠️ Run system command as interpreted by AI"
             >
                 <synonym text="Execute"/>
                 <synonym text="Run"/>
@@ -230,13 +238,51 @@
                     description="Load Jini Update from filesystem or beta chanel">
             </action>
         </group>
+
     </actions>
+
+
+    <extensions defaultExtensionNs="com.intellij">
+        <intentionAction>
+            <!--            <id>com.pannous.jini.FixIntention</id>-->
+            <!-- add "<language>JAVA</language>" when targeting 2022.3 and later only -->
+            <className>com.pannous.jini.FixIntention</className>
+            <category>Fix intentions</category>
+            <!--            <descriptionDirectoryName>FixIntention</descriptionDirectoryName>-->
+        </intentionAction>
+    </extensions>
+
+    <!-- Define the inspection tool -->
+    <!--  <inspectionTool class="com.example.MyInspectionTool" id="MyInspectionTool" group="My Inspections">-->
+    <!--    &lt;!&ndash; Define the problem highlighting for the inspection tool &ndash;&gt;-->
+    <!--    <problemHighlighting>-->
+    <!--      <highlighting id="MyError" severity="ERROR" description="My error highlighting" />-->
+    <!--      &lt;!&ndash; Define the Quick Fixes for the problem highlighting &ndash;&gt;-->
+    <!--      <quickFixes>-->
+    <!--        <localQuickFix-->
+    <!--          name="My Quick Fix"-->
+    <!--          familyName="My Fixes"-->
+    <!--          implementationClass="com.pannous.jini.MyFix"-->
+    <!--          key="MyFix"-->
+    <!--        />-->
+    <!--      </quickFixes>-->
+    <!--    </problemHighlighting>-->
+    <!--  </inspectionTool>-->
+
     <change-notes>
-        • Ready for IntelliJ 2023 releases
-        • Fixed scrolling
-        • Shows suggested contend in Diff Manager for approval
+        • fixed code result parser
+        • added AI fix intentions
     </change-notes>
+
+    <!-- PREVIOUS -->
+    <!--    <change-notes>-->
+    <!--    • Ready for IntelliJ 2023 releases-->
+    <!--    • Fixed scrolling-->
+    <!--    • Shows suggested contend in Diff Manager for approval-->
+    <!--    </change-notes>-->
+
     <!--    https://plugins.jetbrains.com/plugin/21229-jini-->
+
 
 </idea-plugin>
 

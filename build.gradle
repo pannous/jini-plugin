@@ -1,12 +1,18 @@
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version "1.13.2"
+    id("org.jetbrains.intellij") version "1.17.1"
     id 'com.github.johnrengelman.shadow' version '7.0.0' // bundle all dependencies into a single jar
 }
 
 group = "com.pannous"
 
 version = "1.2.3.$subversion"
+
+
+intellij {
+    version = '2024.2'
+}
+
 
 task incrementVersion {
     Properties ext = new Properties()
@@ -29,9 +35,40 @@ shadowJar {
     }
 }
 
-intellij {
-    version = '2022.3.3'
+
+// upload to https://plugins.jetbrains.com/plugin/21229-jini
+// https://plugins.jetbrains.com/docs/intellij/publishing-plugin.html
+// https://plugins.jetbrains.com/docs/intellij/plugin-repository.html
+// https://plugins.jetbrains.com/docs/intellij/plugin-portal-api.html
+// https://plugins.jetbrains.com/docs/intellij/plugin-portal-api-reference.html
+
+//import org.gradle.plugins.ssh.tasks.Rsync
+// upload jar via rsync .ssh/id_rsa to files.pannous.com
+//    tasks.register('uploadJar', Rsync) {
+//task uploadJar(type: Rsync) {
+//    dependsOn shadowJar
+//    from shadowJar.archiveFile
+//    // to server files.pannous.com
+//    into "me@pannous.com:/home/me/files/"
+//    doLast {
+//        println "uploadJar done"
+//    }
+//}
+
+task uploadMyJar(type: Exec) {
+    dependsOn shadowJar
+//    def source = shadowJar.archiveFile
+    def source = tasks.getByName('shadowJar').outputs.files.singleFile
+    def target = 'root@pannous.com:/var/www/webpage/files/intelliJini-plugin-latest.jar'
+    doFirst {
+        println "uploadMyJar FILES: $source -> $target"
+        println "http://pannous.com/files/intelliJini-plugin-latest.jar"
+    }
+    // Set the command to execute
+    commandLine 'scp', '-i', '/Users/me/.ssh/id_rsa', source, target
+
 }
+shadowJar.finalizedBy uploadMyJar
 
 repositories {
     mavenCentral()
@@ -59,6 +96,9 @@ test {
 
 
 dependencies {
+    // https://mvnrepository.com/artifact/com.theokanning.openai-gpt3-java/service
+    implementation 'com.theokanning.openai-gpt3-java:service:0.12.0'
+
 //    implementation('org.junit.jupiter:junit-jupiter-api:5.9.2')
     testImplementation('org.junit.jupiter:junit-jupiter-api:5.9.2')
     testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.9.2')
@@ -67,7 +107,9 @@ dependencies {
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    version.set("2022.3.3")
+//    version.set("2022.3.3")
+    version.set("2023.3")
+//    type.set("RR") // Rust Rover preview
     type.set("CL") // Target IDE Platform
 //    IC - IntelliJ IDEA Community Edition
 //    IU - IntelliJ IDEA Ultimate Edition
@@ -84,17 +126,14 @@ intellij {
 
 tasks {
     apply plugin: 'java'
-
     sourceCompatibility = "17"
     targetCompatibility = "17"
 
     patchPluginXml {
-        sinceBuild.set("222")
-        untilBuild.set("231.*")
+        sinceBuild.set("223")
+        untilBuild.set("241.*")
 //        sinceBuild.set("223")
 //        untilBuild.set("999.*")
-
-
     }
 
     signPlugin {
