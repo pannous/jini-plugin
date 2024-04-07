@@ -25,9 +25,9 @@ public class Prompt {
     }
 
     // using %s not {code} !
-    public String format(String... args) {
-        return String.format(text, args);
-    }
+//    public String format(String... args) {
+//        return String.format(text, args);
+//    }
 
     public String getText() {
         return text;

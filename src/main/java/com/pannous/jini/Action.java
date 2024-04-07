@@ -1,44 +1,29 @@
 package com.pannous.jini;
 
 import com.intellij.history.integration.ui.actions.ShowHistoryAction;
-import com.intellij.lang.Commenter;
 import com.intellij.lang.Language;
-import com.intellij.lang.LanguageCommenters;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.wm.ToolWindow;
-import com.intellij.openapi.wm.ToolWindowManager;
-import com.intellij.ui.content.Content;
-import com.intellij.util.messages.MessageBus;
-import com.pannous.jini.openai.OpenAI2;
+import com.pannous.jini.openai.OpenAI;
 import com.pannous.jini.openai.Prompt;
 import com.pannous.jini.settings.AppSettingsState;
 import com.pannous.jini.settings.Options;
-import com.pannous.jini.window.JiniListener;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Transferable;
 import java.io.IOException;
 import java.util.function.Consumer;
 
 import static com.pannous.jini.Util.*;
-import static com.pannous.jini.openai.OpenAITools.extractInlineCode;
 import static com.pannous.jini.settings.Options.replace;
 
 
@@ -128,7 +113,7 @@ public abstract class Action extends AnAction {
                 updateToolWindow(result, project);
                 writeResult(project, editor, caret, result, prompt, options);
             };
-        OpenAI2.query(project, prompt, selectedText, language.getDisplayName(), callback, replace);
+        OpenAI.query(project, prompt, selectedText, language.getDisplayName(), callback, replace);
     }
 
 

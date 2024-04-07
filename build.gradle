@@ -1,7 +1,17 @@
+// https://plugins.jetbrains.com/plugin/21229-jini/
+// via kaflu@gmx.de name "pannous" but not login pannous on https://plugins.jetbrains.com/
+
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version "1.17.1"
-    id 'com.github.johnrengelman.shadow' version '7.0.0' // bundle all dependencies into a single jar
+//    id("com.intellij.java") // version "0.8.0"
+//    id("com.intellij.modules.java") // for psi
+//    id("com.intellij.modules.python") // for psi
+//    id("org.jetbrains.intellij") // version "1.17.2"
+    id("org.jetbrains.intellij") version "1.17.3"
+//    id("org.jetbrains.intellij") version intellijPluginVersion
+    id 'com.github.johnrengelman.shadow' version '8.1.1' // bundle all dependencies into a single jar
+//    id 'com.github.johnrengelman.shadow' version '7.0.0' // bundle all dependencies into a single jar
+//      id("dev.bmac.intellij.plugin-uploader") version "1.3.4"
 }
 
 group = "com.pannous"
@@ -10,7 +20,10 @@ version = "1.2.3.$subversion"
 
 
 intellij {
-    version = '2024.2'
+    version = '2024.1'
+//    version = '2023.3.6'
+//    "PsiViewer", ,"python" ???
+//    setPlugins(["JavaScript","java"]) // for psi
 }
 
 
@@ -66,8 +79,8 @@ task uploadMyJar(type: Exec) {
     }
     // Set the command to execute
     commandLine 'scp', '-i', '/Users/me/.ssh/id_rsa', source, target
-
 }
+
 shadowJar.finalizedBy uploadMyJar
 
 repositories {
@@ -78,8 +91,10 @@ sourceSets {
     main {
         java {
             exclude("**/**Test.java")
-            exclude("**/OpenAI3.java")
+//            exclude("**/OpenAI3.java")
+            exclude("**/OpenAiTheo.java")
             exclude("**/theokanning/**")
+            exclude("**/kousenit/**") //.claudeai
         }
     }
 }
@@ -96,8 +111,16 @@ test {
 
 
 dependencies {
+    // https://mvnrepository.com/artifact/com.cjcrafter/openai
+//    implementation 'io.github.cdimascio:dotenv-java:3.0.0'
+//    implementation 'com.cjcrafter:openai:2.1.0'
+implementation('com.cjcrafter:openai:2.1.0') {
+    exclude group: 'org.jetbrains', module: 'annotations'
+}
+
     // https://mvnrepository.com/artifact/com.theokanning.openai-gpt3-java/service
-    implementation 'com.theokanning.openai-gpt3-java:service:0.18.2'
+//    implementation 'com.theokanning.openai-gpt3-java:service:0.18.2'
+
 
 //    implementation('org.junit.jupiter:junit-jupiter-api:5.9.2')
     testImplementation('org.junit.jupiter:junit-jupiter-api:5.9.2')
@@ -107,10 +130,13 @@ dependencies {
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-//    version.set("2022.3.3")
-    version.set("2023.3")
+//    version.set("2023.3.3")
+    version.set("2023.3.6")
+//    version.set("2024.1")
 //    type.set("RR") // Rust Rover preview
-    type.set("CL") // Target IDE Platform
+//    type.set("CL") // Target IDE Platform
+//    type.set("IC")
+    type.set("IU")
 //    IC - IntelliJ IDEA Community Edition
 //    IU - IntelliJ IDEA Ultimate Edition
 //    CL - CLion
@@ -126,15 +152,23 @@ intellij {
 
 tasks {
     apply plugin: 'java'
-    sourceCompatibility = "17"
-    targetCompatibility = "17"
+//    sourceCompatibility = "17"
+//    targetCompatibility = "17"
+    sourceCompatibility = "18"
+    targetCompatibility = "18"
+//    sourceCompatibility = "20"
+//    targetCompatibility = "20"
 
     patchPluginXml {
 //        sinceBuild.set("223")
-        sinceBuild.set("233")
-//        untilBuild.set("241.*")
+//        sinceBuild.set("233")
+//        sinceBuild.set("233.3.6")
+        sinceBuild.set("241")
+        untilBuild.set("241.*")
 //        sinceBuild.set("223")
-        untilBuild.set("999.*")
+//        untilBuild.set("999.*")
+//         If you want your plugin to be compatible with all future IDEs, you can leave this field empty.
+//        However, we highly recommend setting it to the latest available IDE version.
     }
 
     signPlugin {
@@ -147,3 +181,11 @@ tasks {
         token.set(System.getenv("PUBLISH_TOKEN"))
     }
 }
+
+//configurations.all {
+//    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+//        if (details.requested.group == 'org.jetbrains' && details.requested.name == 'annotations') {
+//            details.useVersion '24.0.1'
+//        }
+//    }
+//}

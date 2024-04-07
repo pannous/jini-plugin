@@ -1,8 +1,15 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
+<!--    FOR PSI: -->
+<!--    The list of supported products was determined by dependencies defined in the plugin.xml-->
+<!--    <depends>com.intellij.modules.python-pro-capable</depends>-->
+<!--    <depends>com.intellij.modules.java-capable</depends>-->
+<!--    <depends>com.intellij.modules.java</depends>-->
+
     <id>com.pannous.jini-plugin</id>
     <name>Jini</name>
     <!--
+        https://plugins.jetbrains.com/plugin/21229-jini
     https://plugins.jetbrains.com/plugin/21229-jini/versions#verification-results
     -->
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
@@ -287,6 +294,11 @@
 
     <!--    https://plugins.jetbrains.com/plugin/21229-jini-->
 
+    <dependencies>
+<!--        "duplicated dependency" see <depends></depends> above !! -->
+<!--        <plugin id="com.intellij.modules.java-capable"/>-->
+<!--        <module name="com.intellij.modules.python-pro-capable"/>-->
+    </dependencies>
 
 </idea-plugin>
 

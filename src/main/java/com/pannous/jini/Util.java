@@ -34,6 +34,11 @@ import static com.pannous.jini.settings.Options.replace;
 
 public class Util {
 
+    public static void main(String[] args) {
+//        AndroidPlatform.getSdkInt();
+//            android.os.Build.VERSION.SDK_INT;
+//            Android10Platform.enableSessionTickets(SSLSocket);
+    }
     public static String getCurrentLine(Editor editor) {
         Document document = editor.getDocument();
         CaretModel caretModel = editor.getCaretModel();

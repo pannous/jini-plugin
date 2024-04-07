@@ -12,7 +12,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtilCore;
-import com.pannous.jini.openai.OpenAI2;
+import com.pannous.jini.openai.OpenAI;
 import com.pannous.jini.openai.Prompt;
 import com.pannous.jini.settings.Options;
 import org.jetbrains.annotations.NotNull;
@@ -47,7 +47,7 @@ public class MyFix extends Action implements LocalQuickFix {
             updateToolWindow(result, project);
             writeResult(project, editor, caret, result, prompt, options);
         };
-        OpenAI2.query(project, prompt, message, language.getDisplayName(), callback, replace);
+        OpenAI.query(project, prompt, message, language.getDisplayName(), callback, replace);
 
 //        errorElement.delete();
     }

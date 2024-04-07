@@ -12,7 +12,7 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
-import com.pannous.jini.openai.OpenAI2;
+import com.pannous.jini.openai.OpenAI;
 import com.pannous.jini.openai.Prompt;
 import com.pannous.jini.settings.AppSettingsState;
 import com.pannous.jini.settings.Options;
@@ -20,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
+import static com.pannous.jini.FixIntention.getContext;
 import static com.pannous.jini.Util.*;
 import static com.pannous.jini.settings.Options.replace;
 
@@ -76,6 +77,11 @@ public class EditIntention extends BaseElementAtCaretIntentionAction {
             this.command = settings.customRefactor;
         // NOT ALLOWED
 //        java.lang.Throwable: AWT events are not allowed inside write action:
+
+        String context=getContext(element);
+        if (!context.isEmpty())
+            code += "\n" + context;
+
         String finalCode = code;
 
 //        element.delete(); // works but not what we want yet!
@@ -99,7 +105,7 @@ public class EditIntention extends BaseElementAtCaretIntentionAction {
                 writeResult(project, editor, caret, result, prompt, Options.replace);
                 updateToolWindow(result, project);
             };
-            OpenAI2.query(project, prompt, message, language.getDisplayName(), callback, replace);
+            OpenAI.query(project, prompt, message, language.getDisplayName(), callback, replace);
         });
 
     }

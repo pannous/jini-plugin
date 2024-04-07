@@ -1,7 +1,9 @@
 package com.pannous.jini;
 
-import com.intellij.ide.plugins.IdeaPluginDescriptor;
+// ifdef debug
 import com.intellij.ide.plugins.IdeaPluginDescriptorImpl;
+import com.intellij.ide.plugins.IdeaPluginDescriptor;
+
 import com.intellij.ide.plugins.PluginInstaller;
 import com.intellij.ide.plugins.PluginManager;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -9,9 +11,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.extensions.PluginId;
-import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -22,11 +22,13 @@ import java.nio.file.StandardCopyOption;
 import java.util.Comparator;
 import java.util.Optional;
 
+
 public class Update extends AnAction {
 //    PsiElementBaseIntentionAction
 
     @Override
     public void actionPerformed(AnActionEvent e) {
+// ifdef debug
         String jini_id = "com.pannous.jini-plugin";
         Path path = downloadLatestJar();
         System.err.println("Updating Jini plugin to " + path);
@@ -56,6 +58,7 @@ public class Update extends AnAction {
 //        this HARD method works but is not (always?) necessary:
         Application application = ApplicationManager.getApplication();
         application.restart();
+
     }
 
     private Path downloadLatestJar() {
